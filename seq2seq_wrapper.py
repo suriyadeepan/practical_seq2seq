@@ -74,9 +74,10 @@ class Seq2Seq(object):
             # train op to minimize the loss
             self.train_op = tf.train.AdamOptimizer(learning_rate=lr).minimize(self.loss)
 
-        sys.stdout.write('Building Graph')
+        sys.stdout.write('<log> Building Graph ')
         # build comput graph
         __graph__()
+        sys.stdout.write('</log>')
 
 
 

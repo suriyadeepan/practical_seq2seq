@@ -1,23 +1,33 @@
 import tensorflow as tf
 import numpy as np
+import sys
 
 
 class Seq2Seq(object):
 
-    def __init__(self, xseq_len, yseq_len, xvocab_size, yvocab_size, batch_size, emb_dim, num_layers):
+    def __init__(self, xseq_len, yseq_len, xvocab_size, yvocab_size, emb_dim, num_layers, lr=0.0001, epochs=100000, model_name='seq2seq_model'):
+
+        # attach these arguments to self
+        self.xseq_len = xseq_len
+        self.yseq_len = yseq_len
+        self.epochs = epochs
+        self.model_name = model_name
+
+
         # build thy graph
         #  attach any part of the graph that needs to be exposed, to the self
 
         # placeholders
+        tf.reset_default_graph()
         #  encoder inputs : list of indices of length xseq_len
         self.enc_ip = [ tf.placeholder(shape=[None,], 
                         dtype=tf.int64, 
-                        name='ei_{}'.format(t) for t in range(xseq_len) ]
+                        name='ei_{}'.format(t)) for t in range(xseq_len) ]
 
         #  labels that represent the real outputs
         self.labels = [ tf.placeholder(shape=[None,], 
                         dtype=tf.int64, 
-                        name='ei_{}'.format(t) for t in range(yseq_len) ]
+                        name='ei_{}'.format(t)) for t in range(yseq_len) ]
 
         #  decoder inputs : 'GO' + [ y1, y2, ... y_t-1 ]
         self.dec_ip = [ tf.zeros_like(self.enc_ip[0], dtype=tf.int64, name='GO') ] + self.labels[:-1]
@@ -53,7 +63,7 @@ class Seq2Seq(object):
 
         # weighted loss
         #  TODO : add parameter hint
-        loss_weights = [ tf.ones_like(label, dtype=tf.int32) for label in self.labels ]
+        loss_weights = [ tf.ones_like(label, dtype=tf.float32) for label in self.labels ]
         self.loss = tf.nn.seq2seq.sequence_loss(self.decode_outputs, self.labels, loss_weights, yvocab_size)
         # train op to minimize the loss
         self.train_op = tf.train.AdamOptimizer(learning_rate=lr).minimize(self.loss)
@@ -76,29 +86,70 @@ class Seq2Seq(object):
         # get batches
         batchX, batchY = train_batch_gen.__next__()
         # build feed
-        feed_dict = get_feed(batchX, batchY, keep_prob=0.5)
+        feed_dict = self.get_feed(batchX, batchY, keep_prob=0.5)
         _, loss_v = sess.run([self.train_op, self.loss], feed_dict)
         return loss_v
 
-    def eval_step(self, eval_batch_gen):
+    def eval_step(self, sess, eval_batch_gen):
         # get batches
         batchX, batchY = eval_batch_gen.__next__()
         # build feed
-        feed_dict = get_feed(batchX, batchY, keep_prob=1.)
-        loss_v, dec_op_v = sess.run([loss, decode_outputs_test], feed_dict)
-        # dec_op_v is a list; also need to transpose 0,1 indices
+        feed_dict = self.get_feed(batchX, batchY, keep_prob=1.)
+        loss_v, dec_op_v = sess.run([self.loss, self.decode_outputs_test], feed_dict)
+        # dec_op_v is a list; also need to transpose 0,1 indices 
+        #  (interchange batch_size and timesteps dimensions
         dec_op_v = np.array(dec_op_v).transpose([1,0,2])
         return loss_v, dec_op_v, batchX, batchY
 
+    # evaluate 'num_batches' batches
+    def eval_batches(self, sess, eval_batch_gen, num_batches):
+        losses = []
+        for i in range(num_batches):
+            loss_v, dec_op_v, batchX, batchY = self.eval_step(sess, eval_batch_gen)
+            losses.append(loss_v)
+        return np.mean(losses)
+
+    # finally the train function that
+    #  runs the train_op in a session
+    #   evaluates on valid set periodically
+    #    prints statistics
+    def train(self, train_set, valid_set, sess=None ):
         
-            
+        # we need to save the model periodically
+        saver = tf.train.Saver()
 
+        # if no session is given
+        if not sess:
+            # create a session
+            sess = tf.Session()
+            # init all variables
+            sess.run(tf.global_variables_initializer())
 
+        # run M epochs
+        for i in range(self.epochs):
+            try:
+                self.train_batch(sess, train_set)
+                if i% (self.epochs//100) == 0: # TODO : make this tunable by the user
+                    # save model to disk
+                    saver.save(sess, 'ckpt/' + self.model_name + '.ckpt', global_step=i)
+                    # evaluate to get validation loss
+                    val_loss = self.eval_batches(sess, valid_set, 16) # TODO : and this
+                    # print stats
+                    print('\nModel saved to disk at iteration #{}'.format(i))
+                    print('val   loss : {0:.6f}'.format(val_loss))
+                    sys.stdout.flush()
+            except KeyboardInterrupt: # this will most definitely happen, so handle it
+                print('Interrupted by user at iteration {}'.format(i))
+                return sess
 
-
-
-
-
-
-
-
+    def restore_last_session(self):
+        saver = tf.train.Saver()
+        # create a session
+        sess = tf.Session()
+        # get checkpoint state
+        ckpt = tf.train.get_checkpoint_state('ckpt/')
+        # restore session
+        if ckpt and ckpt.model_checkpoint_path:
+            saver.restore(sess, ckpt.model_checkpoint_path)
+        # return to user
+        return sess

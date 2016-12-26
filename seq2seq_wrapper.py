@@ -140,6 +140,7 @@ class Seq2Seq(object):
                     sys.stdout.flush()
             except KeyboardInterrupt: # this will most definitely happen, so handle it
                 print('Interrupted by user at iteration {}'.format(i))
+                self.session = sess
                 return sess
 
     def restore_last_session(self):

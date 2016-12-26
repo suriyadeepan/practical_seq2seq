@@ -154,3 +154,16 @@ class Seq2Seq(object):
             saver.restore(sess, ckpt.model_checkpoint_path)
         # return to user
         return sess
+
+    # prediction
+    def predict(self, sess, X):
+        feed_dict = {self.enc_ip[t]: X[t] for t in range(self.xseq_len)}
+        feed_dict[self.keep_prob] = 1.
+        dec_op_v = sess.run(self.decode_outputs_test, feed_dict)
+        # dec_op_v is a list; also need to transpose 0,1 indices 
+        #  (interchange batch_size and timesteps dimensions
+        dec_op_v = np.array(dec_op_v).transpose([1,0,2])
+        # return the index of item with highest probability
+        return np.argmax(dec_op_v, axis=2)
+
+

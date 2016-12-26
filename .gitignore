@@ -2,3 +2,5 @@
 __pycache__
 *.npy
 .ipynb_checkpoints
+checkpoint
+ckpt/*/*.*

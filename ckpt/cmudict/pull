@@ -1,0 +1,3 @@
+#!/bin/bash
+
+wget -c 'https://www.dropbox.com/s/qfm0ugb9m3laenf/cmudict_ckpt.tar.gz?dl=0' -O cmudict_ckpt.tar.gz

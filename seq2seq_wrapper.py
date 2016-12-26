@@ -129,7 +129,7 @@ class Seq2Seq(object):
         for i in range(self.epochs):
             try:
                 self.train_batch(sess, train_set)
-                if i% (self.epochs//20) == 0: # TODO : make this tunable by the user
+                if i and i% (self.epochs//20) == 0: # TODO : make this tunable by the user
                     # save model to disk
                     saver.save(sess, 'ckpt/' + self.model_name + '.ckpt', global_step=i)
                     # evaluate to get validation loss

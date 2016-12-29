@@ -5,3 +5,5 @@ __pycache__
 checkpoint
 ckpt/*/*.*
 ignore/
+*.pkl
+*.tar.gz

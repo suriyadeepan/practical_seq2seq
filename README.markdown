@@ -7,7 +7,11 @@ To make life easier for beginners looking to experiment with seq2seq model.
 
 ## Datasets
 
-- [x] [CMU Pronouncing Dictionary](https://github.com/suriyadeepan/datasets/tree/master/seq2seq/CMUdict) : Phoneme sequence to words (sequence of alphabets)
+- [x] [CMU Pronouncing Dictionary](https://github.com/suriyadeepan/datasets/tree/master/seq2seq/CMUdict) : Phoneme sequence to word (sequence of alphabets)
+- [x] [Twitter Chat Log](https://github.com/suriyadeepan/datasets/tree/master/seq2seq/twitter) : Sentence to Sentence
+
+![](/img/twitter01.png)
+![](/img/twitter02.png)
 
 
 ## Credits

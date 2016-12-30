@@ -21,22 +21,22 @@ After tweaking the dataset to bring down the overall % of unknown tokens to 3%, 
 | Query					| Reply					|
 | ------------- | ------------- |
 | donald trump won last nights presidential debate according to snap online polls | thought he was a joke |
-| still i think april unk v u would make good radio | the whole thing is the worst of the game |
-| angela is proof of why you cant play with bitches who are in their feelings | lol if you want to be a good one of the world |
-| chop that shit up while blasting death metal | but he has a good job |
+| trump campaign please never delete this | he was a joke |
+| s new scoop is unk the castro connection how trumps company violated the us embargo against cuba | trump is a disgrace to the debate and the media is not a liar |
+| who won the first presidential debate | trump will be a better time for a man |
 | just wanna live in unk everything is 10x better there | i was just on the same side and i was like it was a good time |
 | the lil girl i forgot her name scares the shit out of me n probably always will lmaooo | she was so cute and she was so cute and she was a bitch |
-| love this powerful story about how role models change a childs dreams via | i think they were talking about the same side of the debate |
-| day unk by  have fun in ac | congrats to you  |
-| chelsea clinton unk here that marijuana can kill you uhh | the only reason is that |
-| what is everyone reading these days | i have a feeling that was a good game of the game |
-| that works wanna do coffee or unk too | its a good thing |
-| maybe i missed it but what the heck happened with unk | it was a good idea |
-| i dont live in new york because of their loose common law marriage unk | i think its a threat to the white states and the media movement |
-| excuse me do you have the time  its  | i dont know what i was there |
-| where can i stay posted | if i can get my phone to get a new phone |
+| question of the day who do you think won last nights debate weigh in using | hillary is a trump supporter and a woman who has a better job than a woman |
+| trump is a total embarrassment hes like a unk child who happens to be a professional liar and con man | trump is a lot of money to get a great country |
+| chill the fuck out | thats what i said |
+| so fun to see what the special effects team created for | wow that is the best thing ive ever seen |
+| she was fine too unk voice | she is a good guy |
+| the important ones are still here | i dont think so |
+| been drinking pumpkin spice protein shake every morning for a week and now i literally cannot even | me too i just got it |
+| lmao i just lost my job and i cant even leave early to be in the unk video today | literally the same thing |
+| hey happy birthday have a nice day | [thank you |
 
 ## Credits
 
 - Borrowed most of the code for [seq2seq_wrapper.py](/seq2seq_wrapper.py) from [mikesj-public](https://github.com/mikesj-public/rnn_spelling_bee/blob/master/spelling_bee_RNN.ipynb)
-- Borrowed the Twitter dataset from this dude [Marsan-Ma](https://github.com/Marsan-Ma/)
+- Borrowed the twitter dataset from this dude [Marsan-Ma](https://github.com/Marsan-Ma/)

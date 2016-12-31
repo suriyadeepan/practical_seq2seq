@@ -9,9 +9,10 @@ To make life easier for beginners looking to experiment with seq2seq model.
 
 - [x] [CMU Pronouncing Dictionary](https://github.com/suriyadeepan/datasets/tree/master/seq2seq/CMUdict) : Phoneme sequence to word (sequence of alphabets)
 ![](/img/phoneme.png)
-- [x] [Twitter Chat Log](https://github.com/suriyadeepan/datasets/tree/master/seq2seq/twitter) : Sentence to Sentence
 
 _______________________________________________________________
+
+- [x] [Twitter Chat Log](https://github.com/suriyadeepan/datasets/tree/master/seq2seq/twitter) : Sentence to Sentence
 
 ![](/img/twitter01.png)
 ![](/img/twitter02.png)

@@ -2,7 +2,7 @@
 
 *requires tensorflow [0.12.0]*
 
-To make life easier for beginners looking to experiment with seq2seq model.
+To make life easier for beginners looking to experiment with seq2seq model. Read the article I wrote on seq2seq - [**Practical seq2seq**](http://suriyadeepan.github.io/2016-12-31-practical-seq2seq/), for more details.
 
 
 ## Datasets

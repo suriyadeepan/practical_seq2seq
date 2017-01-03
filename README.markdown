@@ -2,13 +2,16 @@
 
 *requires tensorflow [0.12.0]*
 
-To make life easier for beginners looking to experiment with seq2seq model.
+To make life easier for beginners looking to experiment with seq2seq model. Read the article I wrote on seq2seq - [**Practical seq2seq**](http://suriyadeepan.github.io/2016-12-31-practical-seq2seq/), for more details.
 
 
 ## Datasets
 
 - [x] [CMU Pronouncing Dictionary](https://github.com/suriyadeepan/datasets/tree/master/seq2seq/CMUdict) : Phoneme sequence to word (sequence of alphabets)
 ![](/img/phoneme.png)
+
+_______________________________________________________________
+
 - [x] [Twitter Chat Log](https://github.com/suriyadeepan/datasets/tree/master/seq2seq/twitter) : Sentence to Sentence
 
 ![](/img/twitter01.png)
@@ -36,10 +39,11 @@ After tweaking the dataset to bring down the overall % of unknown tokens to 3%, 
 | lmao i just lost my job and i cant even leave early to be in the unk video today | literally the same thing |
 | hey happy birthday have a nice day | thank you |
 
+_______________________________________________________________
 
 - [x] [Cornell Movie Dialog Corpus](https://github.com/suriyadeepan/datasets/tree/master/seq2seq/cornell_movie_corpus)
 
-\~4% unknown tokens in dataset.
+\~4% unknown tokens in dataset; vocabulary of 8000.
 
 | Query					| Reply					|
 | ------------- | ------------- |

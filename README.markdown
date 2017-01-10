@@ -1,6 +1,6 @@
 # Seq2Seq Wrapper for Tensorflow
 
-*requires tensorflow [0.12.0]*
+![](https://img.shields.io/badge/python-3-brightgreen.svg) ![](https://img.shields.io/badge/tensorflow-0.12.0-yellowgreen.svg)
 
 To make life easier for beginners looking to experiment with seq2seq model. Read the article I wrote on seq2seq - [**Practical seq2seq**](http://suriyadeepan.github.io/2016-12-31-practical-seq2seq/), for more details.
 

@@ -1,4 +1,5 @@
 import numpy as np
+import random
 from random import sample
 
 '''
@@ -6,10 +7,14 @@ from random import sample
     return tuple( (trainX, trainY), (testX,testY), (validX,validY) )
 
 '''
-def split_dataset(x, y, ratio = [0.7, 0.15, 0.15] ):
+def split_dataset(x, y, ratio = [0.7, 0.15, 0.15], shuffle=True):
     # number of examples
     data_len = len(x)
     lens = [ int(data_len*item) for item in ratio ]
+    
+    #shuffle data
+    if shuffle:
+        [x, y] = shuffle_data(x, y)
 
     trainX, trainY = x[:lens[0]], y[:lens[0]]
     testX, testY = x[lens[0]:lens[0]+lens[1]], y[lens[0]:lens[0]+lens[1]]
@@ -17,7 +22,17 @@ def split_dataset(x, y, ratio = [0.7, 0.15, 0.15] ):
 
     return (trainX,trainY), (testX,testY), (validX,validY)
 
+def shuffle_data(x, y):
+    # number of examples
+    data_len = len(x)
+    indices = [i for i in range(data_len)]
 
+    random.seed(271638)
+    random.shuffle(indices)
+
+    return x[indices], y[indices]
+   
+   
 '''
  generate batches from dataset
     yield (x_gen, y_gen)
